@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pigeon.dao.ICustDao">
+    <insert id="insertCustomer" parameterType="Customer">
+        insert into customer(Cname,Sex,Age,Identity,Health,Family,FamilyPhone,State,Room,StartTime,ExpireTime,StartRemarks,EndTime,EndSort,EndReason,EndAppTime,EndState,EndRemarks)
+         values (#{CName},#{Sex}, #{Age},#{Identity}, #{Health}, #{Family}, #{FamilyPhone}, #{State},#{Room},#{StartTime},#{ExpireTime},#{StartRemarks},#{EndTime},#{EndSort},#{EndReason},#{EndAppTime},#{EndState},#{EndRemarks})
+    </insert>
+    <select id="selectHUOLILAOREN" resultType="Customer">
+        select Cname,Sex,Age,Identity,Health,Familyphone,Family,State from customer where Health='活力老人'
+    </select>
+    <select id="selectZILILAOREN" resultType="Customer">
+        select Cname,Sex,Age,Identity,Health,Familyphone,Family,State from customer where Health='自理老人'
+    </select>
+    <select id="selectHULILAOREN" resultType="Customer">
+        select Cname,Sex,Age,Identity,Health,Familyphone,Family,State from customer where Health='护理老人'
+    </select>
+</mapper>
