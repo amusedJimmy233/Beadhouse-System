@@ -16,8 +16,9 @@
 </head>
 <body>
 <div id="app">
-    <el-button type="primary" @click="dialogFormVisible = true">登记入住</el-button>
-
+    <el-page-header @back="goBack" content="入住登记">
+    </el-page-header><br>
+    <el-button type="primary" @click="dialogFormVisible = true">登记入住</el-button><br>
     <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item label="客户姓名" prop="name" placeholder="请输入客户姓名">
@@ -89,6 +90,76 @@
             </el-form-item>
         </el-form>
     </el-dialog>
+    <el-dialog title="修改档案" :visible.sync="dialogEditFormVisible">
+        <el-form :model="editForm" :rules="rules"  ref="editForm" label-width="100px" class="demo-ruleForm">
+            <el-form-item label="客户姓名" prop="name" placeholder="请输入客户姓名">
+                <el-input v-model="editForm.name"></el-input>
+            </el-form-item>
+            <el-form-item label="客户年龄" prop="age" placeholder="请输入客户年龄">
+                <el-input v-model.number="editForm.age"></el-input>
+            </el-form-item>
+            <el-form-item label="客户性别" prop="sex">
+                <el-select v-model="editForm.sex" placeholder="请选择客户性别">
+                    <el-option label="男" value="男"></el-option>
+                    <el-option label="女" value="女"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="身份证号" prop="identity" placeholder="请输入客户身份证号">
+                <el-input v-model="editForm.identity"></el-input>
+            </el-form-item>
+            <el-form-item label="房间号" prop="room" placeholder="请输入客户房间号">
+                <el-input v-model.number="editForm.room"></el-input>
+            </el-form-item>
+            <el-form-item label="老人类型" prop="health">
+                <el-select v-model="editForm.health" placeholder="请选择老人类型">
+                    <el-option label="活力老人" value="活力老人"></el-option>
+                    <el-option label="自理老人" value="自理老人"></el-option>
+                    <el-option label="护理老人" value="护理老人"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="入住时间" required>
+                <el-col :span="11">
+                    <el-form-item prop="date1">
+                        <el-date-picker type="date" format="yyyy 年 MM 月 dd 日"
+                                        value-format="yyyy-MM-dd" placeholder="选择日期" v-model="editForm.date1" style="width: 100%;"></el-date-picker>
+                    </el-form-item>
+                </el-col>
+            </el-form-item>
+
+            <el-form-item label="合同到期时间" required>
+                <el-col :span="11">
+                    <el-form-item prop="date2">
+                        <el-date-picker type="date" format="yyyy 年 MM 月 dd 日"
+                                        value-format="yyyy-MM-dd" placeholder="选择日期" v-model="editForm.date2" style="width: 100%;"></el-date-picker>
+                    </el-form-item>
+                </el-col>
+            </el-form-item>
+
+            <el-form-item label="陪同人姓名" prop="family" placeholder="请输入陪同人姓名">
+                <el-input v-model="editForm.family"></el-input>
+            </el-form-item>
+
+            <el-form-item label="陪同人电话" prop="familyphone" placeholder="请输入陪同人电话">
+                <el-input v-model.number="editForm.familyphone"></el-input>
+            </el-form-item>
+
+            <el-form-item label="客户状态" prop="state">
+                <el-select v-model="editForm.state" placeholder="请选择客户状态">
+                    <el-option label="住院" value="住院"></el-option>
+                    <el-option label="离院" value="离院"></el-option>
+                    <el-option label="暂离" value="暂离"></el-option>
+                </el-select>
+            </el-form-item>
+
+            <el-form-item label="入住备注" prop="startremarks" placeholder="请输入入住备注">
+                <el-input v-model="editForm.startremarks"></el-input>
+            </el-form-item>
+
+            <el-form-item>
+                <el-button type="primary" @click="submiteditForm('editForm')">立即修改</el-button>
+            </el-form-item>
+        </el-form>
+    </el-dialog>
 
     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
         <el-tab-pane label="活力老人" name="first">
@@ -96,43 +167,247 @@
                     :data="firsttableData"
                     style="width: 100%">
                 <el-table-column
-                        prop="date"
-                        label="日期"
-                        width="180">
+                        prop="Cid"
+                        label="档案号"
+                        width="100">
                 </el-table-column>
                 <el-table-column
-                        prop="name"
+                        prop="CName"
                         label="姓名"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Age"
+                        label="年龄"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Sex"
+                        label="性别"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Identity"
+                        label="身份证"
                         width="180">
                 </el-table-column>
                 <el-table-column
-                        prop="address"
-                        label="地址">
+                        prop="Health"
+                        label="类型"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Family"
+                        label="联系人"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="FamilyPhone"
+                        label="联系人电话"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="State"
+                        label="状态"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Room"
+                        label="房间号"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="StartTime"
+                        label="入住时间"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="ExpireTime"
+                        label="合同到期时间"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="StartRemarks"
+                        label="入住备注"
+                        width="200">
+                </el-table-column>
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-button
+                                size="mini"
+                                @click="handleEdit(scope.row)">修改</el-button>
+                        <el-button
+                                size="mini"
+                                type="danger"
+                                @click="handleHide(scope.row)">删除</el-button>
+                    </template>
                 </el-table-column>
             </el-table>
         </el-tab-pane>
-
         <el-tab-pane label="自理老人" name="second">
-                <el-table
-                        :data="secondtableData"
-                        style="width: 100%">
-                    <el-table-column
-                            prop="date"
-                            label="日期"
-                            width="180">
-                    </el-table-column>
-                    <el-table-column
-                            prop="name"
-                            label="姓名"
-                            width="180">
-                    </el-table-column>
-                    <el-table-column
-                            prop="address"
-                            label="地址">
-                    </el-table-column>
-                </el-table>
+            <el-table
+                    :data="secondtableData"
+                    style="width: 100%">
+                <el-table-column
+                        prop="Cid"
+                        label="档案号"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="CName"
+                        label="姓名"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Age"
+                        label="年龄"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Sex"
+                        label="性别"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Identity"
+                        label="身份证"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="Health"
+                        label="类型"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Family"
+                        label="联系人"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="FamilyPhone"
+                        label="联系人电话"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="State"
+                        label="状态"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Room"
+                        label="房间号"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="StartTime"
+                        label="入住时间"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="ExpireTime"
+                        label="合同到期时间"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="StartRemarks"
+                        label="入住备注"
+                        width="200">
+                </el-table-column>
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-button
+                                size="mini"
+                                @click="handleEdit(scope.row)">修改</el-button>
+                        <el-button
+                                size="mini"
+                                type="danger"
+                                @click="handleHide(scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
         </el-tab-pane>
-        <el-tab-pane label="护理老人" name="third">护理老人</el-tab-pane>
+        <el-tab-pane label="护理老人" name="third">
+            <el-table
+                    :data="thirdtableData"
+                    style="width: 100%">
+                <el-table-column
+                        prop="Cid"
+                        label="档案号"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="CName"
+                        label="姓名"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Age"
+                        label="年龄"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Sex"
+                        label="性别"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Identity"
+                        label="身份证"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="Health"
+                        label="类型"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Family"
+                        label="联系人"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="FamilyPhone"
+                        label="联系人电话"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="State"
+                        label="状态"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="Room"
+                        label="房间号"
+                        width="100">
+                </el-table-column>
+                <el-table-column
+                        prop="StartTime"
+                        label="入住时间"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="ExpireTime"
+                        label="合同到期时间"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="StartRemarks"
+                        label="入住备注"
+                        width="200">
+                </el-table-column>
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-button
+                                size="mini"
+                                @click="handleEdit(scope.row)">修改</el-button>
+                        <el-button
+                                size="mini"
+                                type="danger"
+                                @click="handleHide(scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-tab-pane>
     </el-tabs>
 </div>
 </body>
@@ -141,8 +416,24 @@
         el: '#app',
         data() {
             return {
+                nowid:'',
                 dialogFormVisible: false,
+                dialogEditFormVisible: false,
                 ruleForm: {
+                    name: '',
+                    age:'',
+                    sex:'',
+                    identity: '',
+                    room:'',
+                    health: '',
+                    date1: '',
+                    date2:'',
+                    family:'',
+                    familyphone:'',
+                    state:'',
+                    startremarks:''
+                },
+                editForm: {
                     name: '',
                     age:'',
                     identity: '',
@@ -197,42 +488,16 @@
                     ]
                 },
                 formLabelWidth: '120px',
-                activeName: 'second',
-                firsttableData: [{
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }],
-                secondtableData: [{
-                    date: '2022-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2022-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                    date: '2022-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    date: '2022-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }]
+                activeName: 'first',
+                firsttableData: [{}],
+                secondtableData: [{}],
+                thirdtableData: [{}],
             };
+        },
+        created(){
+            this.showHUOLI()
+            this.showZILI()
+            this.showHULI()
         },
         methods: {
             submitForm(formName) {
@@ -266,6 +531,88 @@
             },
             handleClick(tab, event) {
                 console.log(tab, event);
+            },
+            showHUOLI(){
+                axios.post("http://localhost:8081/beadhouse/showHUOLI").then(function (response){
+                    return response.data;
+                }).then(content=>{
+                    this.firsttableData=content;
+                    console.log(this.firsttableData)
+                    this.loading=false;
+                })
+            },
+            showZILI(){
+                axios.post("http://localhost:8081/beadhouse/showZILI").then(function (response){
+                    return response.data;
+                }).then(content=>{
+                    this.secondtableData=content;
+                    this.loading=false;
+                })
+            },
+            showHULI(){
+                axios.post("http://localhost:8081/beadhouse/showHULI").then(function (response){
+                    return response.data;
+                }).then(content=>{
+                    this.thirdtableData=content;
+                    this.loading=false;
+                })
+            },
+            handleHide(row){
+                console.log(row.Cid)
+                let params = new URLSearchParams();
+                params.append("Cid",row.Cid)
+                axios.post("http://localhost:8081/beadhouse/HideInfo",params).then(function (response){
+                    location.reload()
+                })
+            },
+            submiteditForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        let params = new URLSearchParams();
+                        params.append("CName",this.editForm.name)
+                        params.append("Sex",this.editForm.sex)
+                        params.append("Age",this.editForm.age)
+                        params.append("Identity",this.editForm.identity)
+                        params.append("Health",this.editForm.health)
+                        params.append("Family",this.editForm.family)
+                        params.append("FamilyPhone",this.editForm.familyphone)
+                        params.append("State",this.editForm.state)
+                        params.append("Room",this.editForm.room)
+                        params.append("StartTime",this.editForm.date1)
+                        params.append("ExpireTime",this.editForm.date2)
+                        params.append("StartRemarks",this.editForm.startremarks)
+                        params.append("Cid",this.nowid)
+                        console.log(this.editForm)
+                        axios.post("http://localhost:8081/beadhouse/updatecheckin",params).then(function (response){
+                            location.reload()
+                        })
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            handleEdit(row){
+                this.dialogEditFormVisible = true
+                this.nowid=row.Cid
+
+                this.editForm.age=row.Age
+                this.editForm.name=row.CName
+                this.editForm.sex=row.Sex
+                this.editForm.identity=row.Identity
+                this.editForm.room=row.Room
+                this.editForm.health=row.Health
+                this.editForm.date1=row.StartTime
+                this.editForm.date2=row.ExpireTime
+                this.editForm.family=row.Family
+                this.editForm.familyphone=row.FamilyPhone
+                this.editForm.state=row.State
+                this.editForm.startremarks=row.StartRemarks
+                console.log(this.editForm.name)
+            },
+            goBack(){
+                console.log('go back')
+                window.history.go(-1)
             }
         }
     })

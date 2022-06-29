@@ -64,7 +64,6 @@ public class TestDB {
         String dateStr = "2019-01-03";
         Date date = simpleDateFormat.parse(dateStr);
 
-        cust.setStartTime(date);
 //        cust.setExpireTime("2022-06-28");
 
 
@@ -85,7 +84,7 @@ public class TestDB {
         ICustDao custDao=sqlSession.getMapper(ICustDao.class);
 
         //调用方法查询指定编号的部门信息集合
-        List<Customer> depts = custDao.selectHULILAOREN();
+        List<Customer> depts = custDao.selectHUOLILAOREN();
 
         if (depts!=null){
             //找到信息，遍历输出(forEach写法)
@@ -94,6 +93,57 @@ public class TestDB {
         else{
             System.out.println("没有找到指定的部门");
         }
+
+        sqlSession.close();
+    }
+
+    @Test
+    //删除信息
+    public void testDeleteCustomer() throws ParseException {
+        //获取连接
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        //获取Dao对象
+        ICustDao custDao = sqlSession.getMapper(ICustDao.class);
+
+        int result = custDao.deleteCustomer(2);
+
+        //判断结果
+        System.out.println(result>0?"添加成功":"添加失败");
+
+        sqlSession.close();
+    }
+
+    @Test
+    //删除信息
+    public void testselectCustomer() throws ParseException {
+        //获取连接
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        //获取Dao对象
+        ICustDao custDao = sqlSession.getMapper(ICustDao.class);
+
+        Customer cust = custDao.getcustinfo(13);
+
+        //判断结果
+        System.out.println(cust);
+
+        sqlSession.close();
+    }
+
+    @Test
+    //获取所有身份证号
+    public void testgetids() throws ParseException {
+        //获取连接
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        //获取Dao对象
+        ICustDao custDao = sqlSession.getMapper(ICustDao.class);
+
+        List<String> ids=custDao.selectAllIDs();
+
+        //判断结果
+        System.out.println(ids);
 
         sqlSession.close();
     }

@@ -8,12 +8,36 @@
          values (#{CName},#{Sex}, #{Age},#{Identity}, #{Health}, #{Family}, #{FamilyPhone}, #{State},#{Room},#{StartTime},#{ExpireTime},#{StartRemarks},#{EndTime},#{EndSort},#{EndReason},#{EndAppTime},#{EndState},#{EndRemarks})
     </insert>
     <select id="selectHUOLILAOREN" resultType="Customer">
-        select Cname,Sex,Age,Identity,Health,Familyphone,Family,State from customer where Health='活力老人'
+        select Cid,Cname,Sex,Age,Identity,Health,Family,FamilyPhone,State,Room,StartTime,ExpireTime,StartRemarks from customer where Health='活力老人' and ( State='住院' or State='暂离') and isShow='是'
     </select>
     <select id="selectZILILAOREN" resultType="Customer">
-        select Cname,Sex,Age,Identity,Health,Familyphone,Family,State from customer where Health='自理老人'
+        select Cid,Cname,Sex,Age,Identity,Health,Family,FamilyPhone,State,Room,StartTime,ExpireTime,StartRemarks from customer where Health='自理老人' and ( State='住院' or State='暂离') and isShow='是'
     </select>
     <select id="selectHULILAOREN" resultType="Customer">
-        select Cname,Sex,Age,Identity,Health,Familyphone,Family,State from customer where Health='护理老人'
+        select Cid,Cname,Sex,Age,Identity,Health,Family,FamilyPhone,State,Room,StartTime,ExpireTime,StartRemarks from customer where Health='护理老人' and ( State='住院' or State='暂离') and isShow='是'
+    </select>
+    <delete id="deleteCustomer" parameterType="Customer">
+        delete from customer where Cid=#{Cid}
+    </delete>
+    <select id="getcustinfo" resultType="Customer">
+        select Cid,Cname,Sex,Age,Identity,Health,Family,FamilyPhone,State,Room,StartTime,ExpireTime,StartRemarks from customer where Cid=#{Cid}
+    </select>
+    <update id="updatecheckininfo" parameterType="Customer">
+        update customer set Cname=#{CName},Sex=#{Sex},Age=#{Age},Identity=#{Identity},Health=#{Health},Family=#{Family},FamilyPhone=#{FamilyPhone},State=#{State},Room=#{Room},StartTime=#{StartTime},ExpireTime=#{ExpireTime},StartRemarks=#{StartRemarks} where Cid=#{Cid}
+    </update>
+    <select id="ShowAllCustomers" resultType="Customer">
+        select * from customer
+    </select>
+    <update id="hideInfo" parameterType="Customer">
+        update customer set isShow='否' where Cid=#{Cid}
+    </update>
+    <update id="showInfo" parameterType="Customer">
+        update customer set isShow='是' where Cid=#{Cid}
+    </update>
+    <select id="selectAllIDs" resultType="String">
+        select identity from customer
+    </select>
+    <select id="getIDbyIdentity" resultType="int">
+        select Cid from customer where Identity=#{Identity}
     </select>
 </mapper>

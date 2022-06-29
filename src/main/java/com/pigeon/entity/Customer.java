@@ -1,11 +1,13 @@
 package com.pigeon.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 
 public class Customer {
+    private int Cid;
     private String CName;
     private String Sex;
     private int Age;
@@ -15,24 +17,43 @@ public class Customer {
     private String FamilyPhone;
     private String State;
     private int Room;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date StartTime;
+    private String StartTime;
     private String StartRemarks;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date ExpireTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date EndTime;
+    private String ExpireTime;
+    private String EndTime;
     private String EndSort;
     private String EndReason;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date EndAppTime;
+    private String EndAppTime;
     private String EndState;
     private String EndRemarks;
+
+    public Customer(int cid, String CName, String sex, int age, String identity, String health, String family, String familyPhone, String state, int room, String startTime, String startRemarks, String expireTime, String endTime, String endSort, String endReason, String endAppTime, String endState, String endRemarks) {
+        Cid = cid;
+        this.CName = CName;
+        Sex = sex;
+        Age = age;
+        Identity = identity;
+        Health = health;
+        Family = family;
+        FamilyPhone = familyPhone;
+        State = state;
+        Room = room;
+        StartTime = startTime;
+        StartRemarks = startRemarks;
+        ExpireTime = expireTime;
+        EndTime = endTime;
+        EndSort = endSort;
+        EndReason = endReason;
+        EndAppTime = endAppTime;
+        EndState = endState;
+        EndRemarks = endRemarks;
+    }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "CName='" + CName + '\'' +
+                "Cid=" + Cid +
+                ", CName='" + CName + '\'' +
                 ", Sex='" + Sex + '\'' +
                 ", Age=" + Age +
                 ", Identity='" + Identity + '\'' +
@@ -53,25 +74,12 @@ public class Customer {
                 '}';
     }
 
-    public Customer(String CName, String sex, int age, String identity, String health, String family, String familyPhone, String state, int room, Date startTime, String startRemarks, Date expireTime, Date endTime, String endSort, String endReason, Date endAppTime, String endState, String endRemarks) {
-        this.CName = CName;
-        Sex = sex;
-        Age = age;
-        Identity = identity;
-        Health = health;
-        Family = family;
-        FamilyPhone = familyPhone;
-        State = state;
-        Room = room;
-        StartTime = startTime;
-        StartRemarks = startRemarks;
-        ExpireTime = expireTime;
-        EndTime = endTime;
-        EndSort = endSort;
-        EndReason = endReason;
-        EndAppTime = endAppTime;
-        EndState = endState;
-        EndRemarks = endRemarks;
+    public int getCid() {
+        return Cid;
+    }
+
+    public void setCid(int cid) {
+        Cid = cid;
     }
 
     public String getCName() {
@@ -146,11 +154,11 @@ public class Customer {
         Room = room;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return StartTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         StartTime = startTime;
     }
 
@@ -162,19 +170,19 @@ public class Customer {
         StartRemarks = startRemarks;
     }
 
-    public Date getExpireTime() {
+    public String getExpireTime() {
         return ExpireTime;
     }
 
-    public void setExpireTime(Date expireTime) {
+    public void setExpireTime(String expireTime) {
         ExpireTime = expireTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return EndTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         EndTime = endTime;
     }
 
@@ -194,11 +202,11 @@ public class Customer {
         EndReason = endReason;
     }
 
-    public Date getEndAppTime() {
+    public String getEndAppTime() {
         return EndAppTime;
     }
 
-    public void setEndAppTime(Date endAppTime) {
+    public void setEndAppTime(String endAppTime) {
         EndAppTime = endAppTime;
     }
 
