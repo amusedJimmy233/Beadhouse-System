@@ -29,7 +29,7 @@ public interface ICustBiz {
     public int getIDbyIdentity(String Identity);
     //查询所有退院的
     public List<Customer> showCheckOut();
-    //查询所有待审批的名单
+    //查询所有退住待审批的名单
     public List<Customer> showWaitPermission();
     //批准通过
     public Boolean AccerptPermission(Customer cust);
@@ -37,8 +37,20 @@ public interface ICustBiz {
     public Boolean DenyPermission(Customer cust);
     //退住信息更新
     public Boolean updatecheckoutinfo(Customer cust);
-    //获取所有姓名
+    //获取所有在院客户姓名
     public List<String> showAllNames();
     //提交退住信息
     public Boolean addCheckOut(Customer cust);
+    //查询所有外出待审批的名单
+    public List<Customer> showGoOutWaitPermission();
+    //查询所有外出的客户
+    public List<Customer> showGoOut();
+    //批准外出请求
+    public Boolean AccerptGoOutPermission(Customer cust);
+    //批准不通过外出请求
+    public Boolean DenyGoOutPermission(Customer cust);
+    //获取住院客户姓名
+    public List<String> showAllNamesWithState();
+    //提交外出请求
+    public Boolean addGoOut(Customer cust);
 }

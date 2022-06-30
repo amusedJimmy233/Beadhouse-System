@@ -18,7 +18,7 @@
     <el-button type="primary" round @click="to_checkin">入住登记</el-button>
     <el-button type="primary" round @click="to_customers">客户信息</el-button>
     <el-button type="primary" round @click="to_GoOut">外出登记</el-button>
-    <el-button type="primary" round @click="to_CheckOut">退出登记</el-button>
+    <el-button type="primary" round @click="to_CheckOut">退住登记</el-button>
 </div>
 </body>
 <script>

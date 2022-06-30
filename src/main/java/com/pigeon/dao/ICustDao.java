@@ -43,4 +43,16 @@ public interface ICustDao {
     public List<String> showAllNames();
     //提交退住信息
     public int addCheckOut(Customer cust);
+    //查询所有外出待审批的名单
+    public List<Customer> showGoOutWaitPermission();
+    //查询所有外出的客户
+    public List<Customer> showGoOut();
+    //批准外出请求
+    public int AccerptGoOutPermission(Customer cust);
+    //批准不通过
+    public int DenyGoOutPermission(Customer cust);
+    //获取住院客户姓名
+    public List<String> showAllNamesWithState();
+    //提交外出请求
+    public int addGoOut(Customer cust);
 }

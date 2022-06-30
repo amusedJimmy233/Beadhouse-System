@@ -117,4 +117,37 @@ public class CustBizImpl implements ICustBiz {
         int result=custDao.addCheckOut(cust);
         return result>0;
     }
+
+    @Override
+    public List<Customer> showGoOutWaitPermission() {
+        return custDao.showGoOutWaitPermission();
+    }
+
+    @Override
+    public List<Customer> showGoOut() {
+        return custDao.showGoOut();
+    }
+
+    @Override
+    public Boolean AccerptGoOutPermission(Customer cust) {
+        int result= custDao.AccerptGoOutPermission(cust);
+        return result>0;
+    }
+
+    @Override
+    public Boolean DenyGoOutPermission(Customer cust) {
+        int result= custDao.DenyGoOutPermission(cust);
+        return result>0;
+    }
+
+    @Override
+    public List<String> showAllNamesWithState() {
+        return custDao.showAllNamesWithState();
+    }
+
+    @Override
+    public Boolean addGoOut(Customer cust) {
+        int result=custDao.addGoOut(cust);
+        return result>0;
+    }
 }

@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.web.bind.annotation.RestController;
@@ -183,6 +182,15 @@ public class CustController {
             json.put("EndState",cust.getEndState());
             json.put("EndReason",cust.getEndReason());
             json.put("EndRemarks",cust.getEndRemarks());
+            json.put("OutTime",cust.getOutTime());
+            json.put("ExpectBackTime",cust.getExpectBackTime());
+            json.put("Companion",cust.getCompanion());
+            json.put("CompanionPhone",cust.getCompanionPhone());
+            json.put("CompanionRelationship",cust.getCompanionRelationship());
+            json.put("OutState",cust.getOutState());
+            json.put("OutSort",cust.getOutSort());
+            json.put("OutRemarks",cust.getOutRemarks());
+            json.put("OutAppTime",cust.getOutAppTime());
             jsonarray.add(json);
         }
         System.out.println(jsonarray);
@@ -297,6 +305,101 @@ public class CustController {
         String EndAppTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date()).toString();
         cust.setEndAppTime(EndAppTime);
         Boolean isSuccess=custBiz.addCheckOut(cust);
+        System.out.println(isSuccess?"success":"fail");
+    }
+
+    @RequestMapping("ShowGoOutWaitPermission")
+    public String ShowGoOutWaitPermission() throws Exception{
+        System.out.println("访问成功");
+        List<Customer> custs=custBiz.showGoOutWaitPermission();
+        JSONArray jsonarray=new JSONArray();
+        for (Customer cust:custs)
+        {
+            JSONObject json=new JSONObject();
+            json.put("Cid",cust.getCid());
+            json.put("CName",cust.getCName());
+            json.put("Sex",cust.getSex());
+            json.put("Age",cust.getAge());
+            json.put("Identity",cust.getIdentity());
+            json.put("OutTime",cust.getOutTime());
+            json.put("ExpectBackTime",cust.getExpectBackTime());
+            json.put("Companion",cust.getCompanion());
+            json.put("CompanionPhone",cust.getCompanionPhone());
+            json.put("CompanionRelationship",cust.getCompanionRelationship());
+            json.put("OutState",cust.getOutState());
+            json.put("OutSort",cust.getOutSort());
+            json.put("OutRemarks",cust.getOutRemarks());
+            json.put("OutAppTime",cust.getOutAppTime());
+            jsonarray.add(json);
+        }
+        System.out.println(jsonarray);
+        return jsonarray.toString();
+    }
+
+    @RequestMapping("ShowGoOut")
+    public String ShowGoOut() throws Exception{
+        System.out.println("访问成功");
+        List<Customer> custs=custBiz.showGoOut();
+        JSONArray jsonarray=new JSONArray();
+        for (Customer cust:custs)
+        {
+            JSONObject json=new JSONObject();
+            json.put("Cid",cust.getCid());
+            json.put("CName",cust.getCName());
+            json.put("Sex",cust.getSex());
+            json.put("Age",cust.getAge());
+            json.put("Identity",cust.getIdentity());
+            json.put("State",cust.getState());
+            json.put("OutTime",cust.getOutTime());
+            json.put("ExpectBackTime",cust.getExpectBackTime());
+            json.put("Companion",cust.getCompanion());
+            json.put("CompanionPhone",cust.getCompanionPhone());
+            json.put("CompanionRelationship",cust.getCompanionRelationship());
+            json.put("OutState",cust.getOutState());
+            json.put("OutSort",cust.getOutSort());
+            json.put("OutRemarks",cust.getOutRemarks());
+            json.put("OutAppTime",cust.getOutAppTime());
+            jsonarray.add(json);
+        }
+        System.out.println(jsonarray);
+        return jsonarray.toString();
+    }
+
+    @RequestMapping("handleGoOutPermission")
+    public void handleGoOutPermission(Customer cust) throws Exception{
+        System.out.println("处理审核意见"+cust);
+        String OutState=cust.getOutState();
+        if(OutState.equals("通过"))
+        {
+            Boolean isSuccess=custBiz.AccerptGoOutPermission(cust);
+            System.out.println("审核通过");
+        }
+        else
+        {
+            Boolean isSuccess=custBiz.DenyGoOutPermission(cust);
+            System.out.println("审核不通过");
+        }
+    }
+
+    @RequestMapping("getAllNamesWithState")
+    public String getAllNamesWithState() throws Exception{
+        List<String> names=custBiz.showAllNamesWithState();
+        System.out.println("所有名字是："+names);
+        JSONArray jsonarray=new JSONArray();
+        for (String name:names)
+        {
+            JSONObject json=new JSONObject();
+            json.put("Name",name);
+            jsonarray.add(json);
+        }
+        return jsonarray.toString();
+    }
+
+    @RequestMapping("addgoout")
+    public void addGoOut(Customer cust) throws Exception{
+        String OutAppTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date()).toString();
+        cust.setOutAppTime(OutAppTime);
+        Boolean isSuccess=custBiz.addGoOut(cust);
         System.out.println(isSuccess?"success":"fail");
     }
 }

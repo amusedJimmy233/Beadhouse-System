@@ -61,4 +61,22 @@
     <update id="addCheckOut" parameterType="Customer">
         update customer set EndSort=#{EndSort},EndTime=#{EndTime},EndReason=#{EndReason},EndRemarks=#{EndRemarks},EndAppTime=#{EndAppTime},EndState='待审批' where Cname=#{CName}
     </update>
+    <select id="showGoOutWaitPermission" resultType="Customer">
+        select Cid,Cname,Sex,Age,Identity,OutTime,ExpectBackTime,Companion,CompanionPhone,CompanionRelationship,OutSort,OutState,OutRemarks,OutAppTime from customer where OutState='待审批'
+    </select>
+    <select id="showGoOut" resultType="Customer">
+        select Cid,Cname,Sex,Age,Identity,State,OutTime,ExpectBackTime,Companion,CompanionPhone,CompanionRelationship,OutSort,OutState,OutRemarks,OutAppTime from customer where State='暂离'
+    </select>
+    <update id="AccerptGoOutPermission" parameterType="Customer">
+        update customer set OutState=#{OutState},OutRemarks=#{OutRemarks},State='暂离' where Cid=#{Cid}
+    </update>
+    <update id="DenyGoOutPermission" parameterType="Customer">
+        update customer set OutState=#{OutState},OutRemarks=#{OutRemarks} where Cid=#{Cid}
+    </update>
+    <select id="showAllNamesWithState" resultType="String">
+        select Cname from customer where State='住院'
+    </select>
+    <update id="addGoOut" parameterType="Customer">
+        update customer set OutSort=#{OutSort},ExpectBackTime=#{ExpectBackTime},Companion=#{Companion},CompanionPhone=#{CompanionPhone},CompanionRelationship=#{CompanionRelationship},OutTime=#{OutTime},OutRemarks=#{OutRemarks},OutAppTime=#{OutAppTime},OutState='待审批' where Cname=#{CName}
+    </update>
 </mapper>

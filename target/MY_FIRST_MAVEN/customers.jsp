@@ -211,6 +211,41 @@
                     label="退住备注"
                     width="180">
             </el-table-column>
+            <el-table-column
+                    prop="OutSort"
+                    label="外出原因"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="OutTime"
+                    label="外出时间"
+                    width="130">
+            </el-table-column>
+            <el-table-column
+                    prop="ExpectBackTime"
+                    label="预计回来时间"
+                    width="130">
+            </el-table-column>
+            <el-table-column
+                    prop="Companion"
+                    label="陪同人姓名"
+                    width="100">
+            </el-table-column>
+            <el-table-column
+                    prop="CompanionPhone"
+                    label="陪同人电话"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="OutState"
+                    label="外出审批情况"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="OutRemarks"
+                    label="外出备注"
+                    width="180">
+            </el-table-column>
             <el-table-column label="操作" width="300">
                 <template slot-scope="scope">
                     <el-button
@@ -253,7 +288,14 @@
                     endtime:'',
                     endstate:'',
                     endreason:'',
-                    endremarks:''
+                    endremarks:'',
+                    outsort:'',
+                    outtime:'',
+                    expectbacktime:'',
+                    companion:'',
+                    companionphone:'',
+                    companionrelationship:'',
+                    outremarks:'',
                 },
                 rules: {
                     name: [
@@ -347,6 +389,13 @@
                 this.editForm.endsort=row.EndSort
                 this.editForm.endreason=row.EndReason
                 this.editForm.endremarks=row.EndRemarks
+                this.editForm.outsort=row.OutSort
+                this.editForm.outtime=row.OutTime
+                this.editForm.expectbacktime=row.ExpectBackTime
+                this.editForm.companion=row.Companion
+                this.editForm.companionphone=row.CompanionPhone
+                this.editForm.companionrelationship=row.CompanionRelationship
+                this.editForm.outremarks=row.OutRemarks
 
                 console.log(this.editForm.name)
             },

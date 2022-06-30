@@ -19,7 +19,7 @@
     <el-page-header @back="goBack" content="入住登记">
     </el-page-header><br>
     <el-button type="primary" @click="dialogFormVisible = true">登记入住</el-button><br>
-    <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+    <el-dialog title="入住信息" :visible.sync="dialogFormVisible">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item label="客户姓名" prop="name" placeholder="请输入客户姓名">
                 <el-input v-model="ruleForm.name"></el-input>

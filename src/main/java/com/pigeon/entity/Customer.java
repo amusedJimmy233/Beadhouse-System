@@ -1,11 +1,5 @@
 package com.pigeon.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
-
-
 public class Customer {
     private int Cid;
     private String CName;
@@ -26,8 +20,53 @@ public class Customer {
     private String EndAppTime;
     private String EndState;
     private String EndRemarks;
+    private String OutTime;
+    private String ExpectBackTime;
+    private String BackTime;
+    private String Companion;
+    private String CompanionPhone;
+    private String CompanionRelationship;
+    private String OutState;
+    private String OutSort;
+    private String OutRemarks;
+    private String OutAppTime;
 
-    public Customer(int cid, String CName, String sex, int age, String identity, String health, String family, String familyPhone, String state, int room, String startTime, String startRemarks, String expireTime, String endTime, String endSort, String endReason, String endAppTime, String endState, String endRemarks) {
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "Cid=" + Cid +
+                ", CName='" + CName + '\'' +
+                ", Sex='" + Sex + '\'' +
+                ", Age=" + Age +
+                ", Identity='" + Identity + '\'' +
+                ", Health='" + Health + '\'' +
+                ", Family='" + Family + '\'' +
+                ", FamilyPhone='" + FamilyPhone + '\'' +
+                ", State='" + State + '\'' +
+                ", Room=" + Room +
+                ", StartTime='" + StartTime + '\'' +
+                ", StartRemarks='" + StartRemarks + '\'' +
+                ", ExpireTime='" + ExpireTime + '\'' +
+                ", EndTime='" + EndTime + '\'' +
+                ", EndSort='" + EndSort + '\'' +
+                ", EndReason='" + EndReason + '\'' +
+                ", EndAppTime='" + EndAppTime + '\'' +
+                ", EndState='" + EndState + '\'' +
+                ", EndRemarks='" + EndRemarks + '\'' +
+                ", OutTime='" + OutTime + '\'' +
+                ", ExpectBackTime='" + ExpectBackTime + '\'' +
+                ", BackTime='" + BackTime + '\'' +
+                ", Companion='" + Companion + '\'' +
+                ", CompainionPhone='" + CompanionPhone + '\'' +
+                ", CompanionRelationship='" + CompanionRelationship + '\'' +
+                ", OutState='" + OutState + '\'' +
+                ", OutSort='" + OutSort + '\'' +
+                ", OutRemarks='" + OutRemarks + '\'' +
+                ", OutAppTime='" + OutAppTime + '\'' +
+                '}';
+    }
+
+    public Customer(int cid, String CName, String sex, int age, String identity, String health, String family, String familyPhone, String state, int room, String startTime, String startRemarks, String expireTime, String endTime, String endSort, String endReason, String endAppTime, String endState, String endRemarks, String outTime, String expectBackTime, String backTime, String companion, String compainionPhone, String companionRelationship, String outState, String outSort, String outRemarks, String outAppTime) {
         Cid = cid;
         this.CName = CName;
         Sex = sex;
@@ -47,31 +86,16 @@ public class Customer {
         EndAppTime = endAppTime;
         EndState = endState;
         EndRemarks = endRemarks;
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "Cid=" + Cid +
-                ", CName='" + CName + '\'' +
-                ", Sex='" + Sex + '\'' +
-                ", Age=" + Age +
-                ", Identity='" + Identity + '\'' +
-                ", Health='" + Health + '\'' +
-                ", Family='" + Family + '\'' +
-                ", FamilyPhone='" + FamilyPhone + '\'' +
-                ", State='" + State + '\'' +
-                ", Room=" + Room +
-                ", StartTime=" + StartTime +
-                ", StartRemarks='" + StartRemarks + '\'' +
-                ", ExpireTime=" + ExpireTime +
-                ", EndTime=" + EndTime +
-                ", EndSort='" + EndSort + '\'' +
-                ", EndReason='" + EndReason + '\'' +
-                ", EndAppTime=" + EndAppTime +
-                ", EndState='" + EndState + '\'' +
-                ", EndRemarks='" + EndRemarks + '\'' +
-                '}';
+        OutTime = outTime;
+        ExpectBackTime = expectBackTime;
+        BackTime = backTime;
+        Companion = companion;
+        CompanionPhone = compainionPhone;
+        CompanionRelationship = companionRelationship;
+        OutState = outState;
+        OutSort = outSort;
+        OutRemarks = outRemarks;
+        OutAppTime = outAppTime;
     }
 
     public int getCid() {
@@ -227,5 +251,85 @@ public class Customer {
     }
 
     public Customer() {
+    }
+
+    public String getOutTime() {
+        return OutTime;
+    }
+
+    public void setOutTime(String outTime) {
+        OutTime = outTime;
+    }
+
+    public String getExpectBackTime() {
+        return ExpectBackTime;
+    }
+
+    public void setExpectBackTime(String expectBackTime) {
+        ExpectBackTime = expectBackTime;
+    }
+
+    public String getBackTime() {
+        return BackTime;
+    }
+
+    public void setBackTime(String backTime) {
+        BackTime = backTime;
+    }
+
+    public String getCompanion() {
+        return Companion;
+    }
+
+    public void setCompanion(String companion) {
+        Companion = companion;
+    }
+
+    public String getCompanionPhone() {
+        return CompanionPhone;
+    }
+
+    public void setCompanionPhone(String compainionPhone) {
+        CompanionPhone = compainionPhone;
+    }
+
+    public String getCompanionRelationship() {
+        return CompanionRelationship;
+    }
+
+    public void setCompanionRelationship(String companionRelationship) {
+        CompanionRelationship = companionRelationship;
+    }
+
+    public String getOutState() {
+        return OutState;
+    }
+
+    public void setOutState(String outState) {
+        OutState = outState;
+    }
+
+    public String getOutSort() {
+        return OutSort;
+    }
+
+    public void setOutSort(String outSort) {
+        OutSort = outSort;
+    }
+
+    public String getOutRemarks() {
+        return OutRemarks;
+    }
+
+    public void setOutRemarks(String outRemarks) {
+        OutRemarks = outRemarks;
+    }
+
+    public String getOutAppTime() {
+        return OutAppTime;
+    }
+
+    public void setOutAppTime(String outAppTime) {
+        OutAppTime = outAppTime;
     }
 }

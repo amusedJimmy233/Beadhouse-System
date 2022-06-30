@@ -376,20 +376,6 @@
 
                     ]
                 },
-                ruleForm: {
-                    name: '',
-                    age:'',
-                    sex:'',
-                    identity: '',
-                    room:'',
-                    health: '',
-                    date1: '',
-                    date2:'',
-                    family:'',
-                    familyphone:'',
-                    state:'',
-                    startremarks:''
-                },
                 checkoutForm:{
                     name:'',
                     endsort:'',
@@ -451,26 +437,6 @@
                     this.loading=false;
                 })
             },
-            submitForm(formName) {
-                let params = new URLSearchParams();
-                params.append("CName",this.ruleForm.name)
-                params.append("Sex",this.ruleForm.sex)
-                params.append("Age",this.ruleForm.age)
-                params.append("Identity",this.ruleForm.identity)
-                params.append("Health",this.ruleForm.health)
-                params.append("Family",this.ruleForm.family)
-                params.append("FamilyPhone",this.ruleForm.familyphone)
-                params.append("State",this.ruleForm.state)
-                params.append("Room",this.ruleForm.room)
-                params.append("StartTime",this.ruleForm.date1)
-                params.append("ExpireTime",this.ruleForm.date2)
-                params.append("StartRemarks",this.ruleForm.startremarks)
-                console.log(this.ruleForm)
-                axios.post("http://localhost:8081/beadhouse/",params).then(function (response){
-                    location.reload()
-                })
-
-            },
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
@@ -482,26 +448,6 @@
                 let params = new URLSearchParams();
                 params.append("Cid",row.Cid)
                 axios.post("http://localhost:8081/beadhouse/HideInfo",params).then(function (response){
-                    location.reload()
-                })
-            },
-            submiteditForm() {
-                let params = new URLSearchParams();
-                params.append("CName",this.editForm.name)
-                params.append("Sex",this.editForm.sex)
-                params.append("Age",this.editForm.age)
-                params.append("Identity",this.editForm.identity)
-                params.append("State",this.editForm.state)
-                params.append("StartTime",this.editForm.date1)
-                params.append("EndTime",this.editForm.date2)
-                params.append("EndSort",this.editForm.endsort)
-                params.append("EndReason",this.editForm.endreason)
-                params.append("EndAppTime",this.editForm.date3)
-                params.append("EndState",this.editForm.endstate)
-                params.append("EndRemarks",this.editForm.endremarks)
-                params.append("Cid",this.nowid)
-                console.log(this.editForm)
-                axios.post("http://localhost:8081/beadhouse/updatecheckout",params).then(function (response){
                     location.reload()
                 })
             },
@@ -551,7 +497,7 @@
                 axios.post("http://localhost:8081/beadhouse/addcheckout",params).then(function (response){
                     location.reload()
                 })
-            }
+            },
         }
     })
 </script>

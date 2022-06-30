@@ -497,7 +497,7 @@
                 axios.post("http://localhost:8081/beadhouse/addcheckout",params).then(function (response){
                     location.reload()
                 })
-            }
+            },
         }
     })
 </script>
