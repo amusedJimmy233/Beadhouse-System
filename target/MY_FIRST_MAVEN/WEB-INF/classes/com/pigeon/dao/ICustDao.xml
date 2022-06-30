@@ -35,9 +35,30 @@
         update customer set isShow='是' where Cid=#{Cid}
     </update>
     <select id="selectAllIDs" resultType="String">
-        select identity from customer
+        select Identity from customer
     </select>
     <select id="getIDbyIdentity" resultType="int">
         select Cid from customer where Identity=#{Identity}
     </select>
+    <select id="showCheckOut" resultType="Customer">
+        select Cid,Cname,Sex,Age,State,Identity,StartTime,EndTime,EndSort,EndReason,EndState,EndAppTime,EndRemarks from customer where State='离院'
+    </select>
+    <select id="showWaitPermission" resultType="Customer">
+        select Cid,Cname,Sex,Age,State,Identity,StartTime,EndSort,EndReason,EndState,EndAppTime from customer where EndState='待审批'
+    </select>
+    <update id="AccerptPermission" parameterType="Customer">
+        update customer set EndState=#{EndState},EndRemarks=#{EndRemarks},State='离院' where Cid=#{Cid}
+    </update>
+    <update id="DenyPermission" parameterType="Customer">
+        update customer set EndState=#{EndState},EndRemarks=#{EndRemarks} where Cid=#{Cid}
+    </update>
+    <update id="updatecheckoutinfo" parameterType="Customer">
+        update customer set Cname=#{CName},Sex=#{Sex},Age=#{Age},Identity=#{Identity},State=#{State},StartTime=#{StartTime},EndTime=#{EndTime},EndSort=#{EndSort},EndReason=#{EndReason},EndAppTime=#{EndAppTime},EndState=#{EndState},EndRemarks=#{EndRemarks} where Cid=#{Cid}
+    </update>
+    <select id="showAllNames" resultType="String">
+        select Cname from customer where State='住院' or State='暂离'
+    </select>
+    <update id="addCheckOut" parameterType="Customer">
+        update customer set EndSort=#{EndSort},EndTime=#{EndTime},EndReason=#{EndReason},EndRemarks=#{EndRemarks},EndAppTime=#{EndAppTime},EndState='待审批' where Cname=#{CName}
+    </update>
 </mapper>

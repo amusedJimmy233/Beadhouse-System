@@ -29,4 +29,18 @@ public interface ICustDao {
     public List<String> selectAllIDs();
     //通过身份证号获得Cid
     public int getIDbyIdentity(String Identity);
+    //查询所有退院的
+    public List<Customer> showCheckOut();
+    //查询所有待审批的名单
+    public List<Customer> showWaitPermission();
+    //批准通过
+    public int AccerptPermission(Customer cust);
+    //批准不通过
+    public int DenyPermission(Customer cust);
+    //退住信息更新
+    public int updatecheckoutinfo(Customer cust);
+    //获取所有姓名
+    public List<String> showAllNames();
+    //提交退住信息
+    public int addCheckOut(Customer cust);
 }

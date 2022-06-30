@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -176,6 +180,7 @@ public class CustController {
             json.put("StartRemarks",cust.getStartRemarks());
             json.put("EndTime",cust.getEndTime());
             json.put("EndSort",cust.getEndSort());
+            json.put("EndState",cust.getEndState());
             json.put("EndReason",cust.getEndReason());
             json.put("EndRemarks",cust.getEndRemarks());
             jsonarray.add(json);
@@ -196,5 +201,102 @@ public class CustController {
         int Cid=cust.getCid();
         Boolean isAddSuccess=custBiz.showInfo(Cid);
         System.out.println(isAddSuccess?"success":"fail");
+    }
+
+    @RequestMapping("ShowCheckOut")
+    public String ShowCheckOut() throws Exception{
+        System.out.println("访问成功");
+        List<Customer> custs=custBiz.showCheckOut();
+        JSONArray jsonarray=new JSONArray();
+        for (Customer cust:custs)
+        {
+            JSONObject json=new JSONObject();
+            json.put("Cid",cust.getCid());
+            json.put("CName",cust.getCName());
+            json.put("Sex",cust.getSex());
+            json.put("Age",cust.getAge());
+            json.put("Identity",cust.getIdentity());
+            json.put("State",cust.getState());
+            json.put("StartTime",cust.getStartTime());
+            json.put("EndTime",cust.getEndTime());
+            json.put("EndSort",cust.getEndSort());
+            json.put("EndReason",cust.getEndReason());
+            json.put("EndAppTime",cust.getEndAppTime());
+            json.put("EndState",cust.getEndState());
+            json.put("EndRemarks",cust.getEndRemarks());
+            jsonarray.add(json);
+        }
+        System.out.println(jsonarray);
+        return jsonarray.toString();
+    }
+
+    @RequestMapping("ShowWaitPermission")
+    public String ShowWaitPermission() throws Exception{
+        System.out.println("访问成功");
+        List<Customer> custs=custBiz.showWaitPermission();
+        JSONArray jsonarray=new JSONArray();
+        for (Customer cust:custs)
+        {
+            JSONObject json=new JSONObject();
+            json.put("Cid",cust.getCid());
+            json.put("CName",cust.getCName());
+            json.put("Sex",cust.getSex());
+            json.put("Age",cust.getAge());
+            json.put("Identity",cust.getIdentity());
+            json.put("State",cust.getState());
+            json.put("StartTime",cust.getStartTime());
+            json.put("EndSort",cust.getEndSort());
+            json.put("EndReason",cust.getEndReason());
+            json.put("EndAppTime",cust.getEndAppTime());
+            json.put("EndState",cust.getEndSort());
+            jsonarray.add(json);
+        }
+        System.out.println(jsonarray);
+        return jsonarray.toString();
+    }
+
+    @RequestMapping("handlePermission")
+    public void handlePermission(Customer cust) throws Exception{
+        System.out.println("处理审核意见"+cust);
+        String EndState=cust.getEndState();
+        if(EndState.equals("通过"))
+        {
+            custBiz.AccerptPermission(cust);
+            System.out.println("审核通过");
+        }
+        else
+        {
+            custBiz.DenyPermission(cust);
+            System.out.println("审核不通过");
+        }
+    }
+
+    @RequestMapping("updatecheckout")
+    public void updatecheckout(Customer cust) throws Exception{
+        System.out.println("要修改的用户信息"+cust);
+        Boolean isAddSuccess=custBiz.updatecheckoutinfo(cust);
+        System.out.println(isAddSuccess?"success":"fail");
+    }
+
+    @RequestMapping("getAllNames")
+    public String getAllNames() throws Exception{
+        List<String> names=custBiz.showAllNames();
+        System.out.println("所有名字是："+names);
+        JSONArray jsonarray=new JSONArray();
+        for (String name:names)
+        {
+            JSONObject json=new JSONObject();
+            json.put("Name",name);
+            jsonarray.add(json);
+        }
+        return jsonarray.toString();
+    }
+
+    @RequestMapping("addcheckout")
+    public void addCheckOut(Customer cust) throws Exception{
+        String EndAppTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date()).toString();
+        cust.setEndAppTime(EndAppTime);
+        Boolean isSuccess=custBiz.addCheckOut(cust);
+        System.out.println(isSuccess?"success":"fail");
     }
 }

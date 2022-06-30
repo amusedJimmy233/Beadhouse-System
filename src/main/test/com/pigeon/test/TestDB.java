@@ -147,4 +147,11 @@ public class TestDB {
 
         sqlSession.close();
     }
+
+    @Test
+    //获取当前时间（string）
+    public void getnowtime(){
+        String EndTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date()).toString();
+        System.out.println(EndTime);
+    }
 }

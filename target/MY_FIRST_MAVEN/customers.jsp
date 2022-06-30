@@ -85,7 +85,7 @@
                     <el-input v-model="editForm.startremarks"></el-input>
                 </el-form-item>
 
-                <el-form-item label="退住时间" required>
+                <el-form-item label="退住时间">
                     <el-col :span="11">
                         <el-form-item prop="endtime">
                             <el-date-picker type="date" format="yyyy 年 MM 月 dd 日"

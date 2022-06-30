@@ -78,4 +78,43 @@ public class CustBizImpl implements ICustBiz {
     public int getIDbyIdentity(String Identity) {
         return custDao.getIDbyIdentity(Identity);
     }
+
+    @Override
+    public List<Customer> showCheckOut() {
+        return custDao.showCheckOut();
+    }
+
+    @Override
+    public List<Customer> showWaitPermission() {
+        return custDao.showWaitPermission();
+    }
+
+    @Override
+    public Boolean AccerptPermission(Customer cust) {
+        int result=custDao.AccerptPermission(cust);
+        return result>0;
+    }
+
+    @Override
+    public Boolean DenyPermission(Customer cust) {
+        int result=custDao.DenyPermission(cust);
+        return result>0;
+    }
+
+    @Override
+    public Boolean updatecheckoutinfo(Customer cust) {
+        int result=custDao.updatecheckoutinfo(cust);
+        return result>0;
+    }
+
+    @Override
+    public List<String> showAllNames() {
+        return custDao.showAllNames();
+    }
+
+    @Override
+    public Boolean addCheckOut(Customer cust) {
+        int result=custDao.addCheckOut(cust);
+        return result>0;
+    }
 }
