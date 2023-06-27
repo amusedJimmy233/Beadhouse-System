@@ -26,6 +26,7 @@ public class CustController {
         String CIdentity=cust.getIdentity();
         Boolean isAddSuccess;
         if (ids.contains(CIdentity)){
+            //已经存在该用户，更新数据
             int Cid=custBiz.getIDbyIdentity(CIdentity);
             cust.setCid(Cid);
             isAddSuccess=custBiz.updatecheckininfo(cust);
@@ -33,6 +34,7 @@ public class CustController {
             System.out.println(cust);
         }
         else {
+            //不存在该用户，添加用户信息
             isAddSuccess=custBiz.addCust(cust);
         }
         System.out.println(isAddSuccess?"success":"fail");
